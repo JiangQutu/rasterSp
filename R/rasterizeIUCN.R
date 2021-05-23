@@ -107,14 +107,14 @@ rasterizeIUCN <- function(dsn=paste0(getwd(), "IUCN/AMPHIBIANS.shp"), id="binomi
     # Calculate the number of cores available and use 2 cores
     no_cores <- 2
     # Initiate cluster
-    cl <- parallel::makeCluster(no_cores)
+    cl <- parallel::makeCluster(no_cores, setup_strategy = "sequential")
     parallel::clusterEvalQ(cl, sapply(c("raster", "rgdal", "sf", "fasterize"), require, char=TRUE))
   } else{
     # Calculate the number of cores available and use 50% of available cores
     no_cores <- ceiling(0.5*parallel::detectCores())
     
     # Initiate cluster
-    cl <- parallel::makeCluster(no_cores)
+    cl <- parallel::makeCluster(no_cores, setup_strategy = "sequential")
     parallel::clusterEvalQ(cl, sapply(c("raster", "rgdal", "sp"), require, char=TRUE))
   } 
   

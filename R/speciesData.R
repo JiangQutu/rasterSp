@@ -47,7 +47,7 @@ speciesData <- function(species_names=NA, path=getwd(), filename=NA, ...){
     no_cores <- ceiling(0.75*parallel::detectCores())
     
     # Initiate cluster
-    cl <- parallel::makeCluster(no_cores)
+    cl <- parallel::makeCluster(no_cores, setup_strategy = "sequential")
     
     # Load variables
     parallel::clusterExport(cl, "path",envir=environment())

@@ -62,7 +62,7 @@ getRangeArea<- function(dsn=paste0(getwd(), "IUCN/AMPHIBIANS.shp"), id="binomial
     no_cores <- ceiling(0.75*parallel::detectCores())
     
     # Initiate cluster
-    cl <- parallel::makeCluster(no_cores)
+    cl <- parallel::makeCluster(no_cores, setup_strategy = "sequential")
     
     # Load packages for cluster
     parallel::clusterEvalQ(cl, sapply(c("sf", "dplyr"), require, char=TRUE))
